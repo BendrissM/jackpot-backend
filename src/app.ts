@@ -1,12 +1,11 @@
-import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import express from "express";
 import { validateSessionBody, validateSessionId } from "./middlewares/session";
 import { validateAccountBody } from "./middlewares/account";
 import { SessionStates } from "./types/session";
 import { generateRollResult } from "./utils/generateRollResult";
+import prisma from "../client";
 
-const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
