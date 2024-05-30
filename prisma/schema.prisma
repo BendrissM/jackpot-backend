@@ -15,4 +15,17 @@ model Account {
   balance   Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  sessions  Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  accountId String
+  credit    Int      @default(10)
+  // too bad Prisma doesn't support enums for SQLite
+  state     String   @default("open") // or "closed"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  account   Account  @relation(fields: [accountId], references: [id])
 }
